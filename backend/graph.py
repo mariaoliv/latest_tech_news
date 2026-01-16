@@ -262,3 +262,14 @@ graph = builder.compile(checkpointer=memory)
 # result = graph.invoke(state, config)
 # print(result.get("final_summary"))
 # print(result.get("messages"))
+
+async def get_startup_summary(thread_id: str = "startup_thread"):
+    config = {"configurable": {"thread_id": thread_id}}
+    
+    initial_state = {
+        "messages": [{"role": "user", "content": "Summarize the latest tech news"}]
+    }
+    
+    result = await graph.ainvoke(initial_state, config)
+    
+    return result.get("final_summary")
