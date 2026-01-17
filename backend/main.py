@@ -8,7 +8,7 @@ app = FastAPI(title="Latest Tech News API")
 
 app.add_middleware(
     CORSMiddleware,
-    allow_origins=["http://localhost:5173/"],  
+    allow_origins=["http://localhost:5173", "http://localhost:5174"],  
     allow_credentials=True,
     allow_methods=["*"],
     allow_headers=["*"],
@@ -18,7 +18,7 @@ app.add_middleware(
 def health_check():
     return {"status": "ok"}
 
-@app.get("/news-summary")
+@app.get("/news_summary")
 async def news_summary():
     try:
         thread_id = str(uuid.uuid4())
